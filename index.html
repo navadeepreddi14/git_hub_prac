@@ -1,722 +1,1023 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Git & GitHub | Developer Guide</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #0b1120;
-            color: #f1f5f9;
-            line-height: 1.7;
-        }
-
-        /* Navigation */
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: #111b2e;
-            border-bottom: 1px solid #26364f;
-        }
-
-        .logo {
-            font-size: 23px;
-            font-weight: bold;
-            color: #8bb4ff;
-        }
-
-        nav a {
-            color: #cbd5e1;
-            text-decoration: none;
-            margin-left: 22px;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            color: #82aaff;
-        }
-
-        /* Hero Section */
-
-        .hero {
-            text-align: center;
-            padding: 90px 20px 65px;
-            background:
-                radial-gradient(circle at top, #263d70, #0b1120 65%);
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 7px 18px;
-            border: 1px solid #526fae;
-            border-radius: 30px;
-            color: #a9c6ff;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 7vw, 65px);
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #82aaff;
-        }
-
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-            color: #b7c5d9;
-            font-size: 17px;
-        }
-
-        .hero-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 13px 28px;
-            background: #527ef0;
-            color: white;
-            border-radius: 9px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .hero-button:hover {
-            background: #759aff;
-            transform: translateY(-3px);
-        }
-
-        /* Common Sections */
-
-        .section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 65px 25px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #94a3b8;
-            margin-bottom: 38px;
-        }
-
-        /* Cards */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        .card {
-            background: #152239;
-            border: 1px solid #293c5c;
-            border-radius: 18px;
-            padding: 30px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: #7098f5;
-            box-shadow: 0 12px 35px #0005;
-        }
-
-        .card-icon {
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
-
-        .card h3 {
-            color: #8bb4ff;
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #bdcadd;
-            margin-bottom: 15px;
-        }
-
-        .card ul {
-            padding-left: 20px;
-            color: #d5dfed;
-        }
-
-        .card li {
-            margin: 8px 0;
-        }
-
-        /* Comparison */
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .compare-box {
-            background: #152239;
-            border: 1px solid #293c5c;
-            border-radius: 15px;
-            padding: 25px;
-        }
-
-        .compare-box h3 {
-            color: #8bb4ff;
-            margin-bottom: 12px;
-        }
-
-        /* Workflow */
-
-        .workflow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 13px;
-        }
-
-        .step {
-            background: #1b2d49;
-            border: 1px solid #527ef0;
-            border-radius: 12px;
-            padding: 17px 22px;
-            text-align: center;
-            min-width: 145px;
-        }
-
-        .step strong {
-            display: block;
-            color: #9bbcff;
-        }
-
-        .step small {
-            color: #b5c3d8;
-        }
-
-        .arrow {
-            color: #82aaff;
-            font-size: 25px;
-        }
-
-        /* Commands */
-
-        .commands {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .command {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            background: #152239;
-            padding: 17px;
-            border: 1px solid #293c5c;
-            border-radius: 12px;
-        }
-
-        .command-info {
-            min-width: 0;
-        }
-
-        .command code {
-            color: #9bbcff;
-            font-size: 14px;
-            overflow-wrap: anywhere;
-        }
-
-        .command p {
-            color: #9baec7;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .copy-btn {
-            border: none;
-            padding: 8px 12px;
-            border-radius: 7px;
-            background: #355baf;
-            color: white;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .copy-btn:hover {
-            background: #527ef0;
-        }
-
-        /* Highlight */
-
-        .highlight {
-            background: linear-gradient(120deg, #1c3767, #372b68);
-            border: 1px solid #536db2;
-            padding: 30px;
-            border-radius: 17px;
-            text-align: center;
-        }
-
-        .highlight h3 {
-            font-size: 25px;
-            margin-bottom: 12px;
-        }
-
-        .highlight p {
-            color: #d5e0ff;
-        }
-
-        /* Footer */
-
-        footer {
-            text-align: center;
-            padding: 28px 15px;
-            background: #111b2e;
-            color: #94a3b8;
-            border-top: 1px solid #26364f;
-        }
-
-        footer strong {
-            color: #8bb4ff;
-        }
-
-        /* Responsive */
-
-        @media (max-width: 700px) {
-
-            nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            nav a {
-                margin: 0 8px;
-            }
-
-            .cards,
-            .comparison,
-            .commands {
-                grid-template-columns: 1fr;
-            }
-
-            .arrow {
-                transform: rotate(90deg);
-            }
-
-            .hero {
-                padding: 65px 18px;
-            }
-
-            .section-title {
-                font-size: 27px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A beginner-friendly guide to Git, GitHub and automatic Vercel deployment.">
+<title>Git, GitHub & Vercel — Beginner Guide</title>
+
+<style>
+:root {
+  --bg:#080d19;
+  --panel:#111b2e;
+  --panel2:#16243b;
+  --line:#293b59;
+  --text:#edf3ff;
+  --muted:#a8b6cc;
+  --blue:#83aaff;
+  --cyan:#69dfd0;
+  --green:#75d6a1;
+  --yellow:#ffd27a;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:85px;
+}
+
+body {
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+a {
+  color:var(--blue);
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+nav {
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:14px max(5%,calc((100% - 1160px)/2));
+  background:#0d1628ed;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.logo {
+  font-weight:800;
+  font-size:18px;
+  white-space:nowrap;
+}
+
+.logo span {
+  color:var(--blue);
+}
+
+.navlinks {
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.navlinks a {
+  font-size:13px;
+  color:#c4d1e5;
+}
+
+.hero {
+  padding:82px 20px 76px;
+  text-align:center;
+  background:radial-gradient(
+    ellipse at 50% 0%,
+    #25477c 0%,
+    #101b31 42%,
+    var(--bg) 76%
+  );
+}
+
+.eyebrow {
+  display:inline-block;
+  border:1px solid #496ba6;
+  border-radius:99px;
+  padding:5px 14px;
+  color:#b7ceff;
+  font-size:12px;
+  letter-spacing:1.2px;
+  font-weight:700;
+}
+
+h1 {
+  font-size:clamp(36px,6vw,64px);
+  line-height:1.12;
+  margin:20px auto;
+  max-width:900px;
+}
+
+h1 span {
+  color:var(--blue);
+}
+
+.hero p {
+  max-width:720px;
+  margin:auto;
+  color:#c1cee2;
+  font-size:17px;
+}
+
+.btn {
+  display:inline-block;
+  margin-top:25px;
+  background:#4779e8;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.btn:hover {
+  background:#6090f6;
+  text-decoration:none;
+}
+
+.wrap {
+  max-width:1120px;
+  margin:auto;
+  padding:58px 22px;
+}
+
+.section-head {
+  text-align:center;
+  margin-bottom:32px;
+}
+
+.section-head h2 {
+  font-size:clamp(25px,4vw,34px);
+  margin-bottom:7px;
+}
+
+.section-head p {
+  color:var(--muted);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+
+.card,.panel {
+  background:linear-gradient(145deg,var(--panel),#0e1728);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:25px;
+}
+
+.card h3,.panel h3 {
+  color:var(--blue);
+  font-size:21px;
+  margin-bottom:9px;
+}
+
+.card p,.panel p {
+  color:#c3cee0;
+}
+
+.card ul {
+  padding-left:20px;
+  color:#cbd6e8;
+  margin-top:12px;
+}
+
+.card li {
+  margin:5px 0;
+}
+
+.kicker {
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.compare {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.compare .card {
+  padding:21px;
+}
+
+.compare h3 {
+  font-size:19px;
+}
+
+.flow {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  align-items:stretch;
+}
+
+.flow .step {
+  background:var(--panel2);
+  border:1px solid #385582;
+  border-radius:13px;
+  padding:17px 12px;
+  text-align:center;
+}
+
+.step b {
+  display:block;
+  color:#a9c5ff;
+}
+
+.step small {
+  color:var(--muted);
+}
+
+.note {
+  border-left:4px solid var(--yellow);
+  background:#282315;
+  padding:14px 17px;
+  border-radius:8px;
+  color:#f7e6bd;
+  margin:20px 0;
+}
+
+.success {
+  border-left-color:var(--green);
+  background:#10271f;
+  color:#c8f5dc;
+}
+
+.command-list {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.command {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#0b1424;
+  border:1px solid var(--line);
+  padding:13px 14px;
+  border-radius:11px;
+}
+
+.command code,pre code {
+  font-family:Consolas,monospace;
+  color:#a9c5ff;
+  overflow-wrap:anywhere;
+}
+
+.command small {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.copy {
+  border:0;
+  background:#345ca9;
+  color:white;
+  padding:7px 11px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.copy:hover {
+  background:#4779e8;
+}
+
+pre {
+  background:#070c15;
+  border:1px solid #273750;
+  border-radius:12px;
+  padding:18px;
+  overflow:auto;
+  margin:12px 0 18px;
+  white-space:pre-wrap;
+}
+
+pre code {
+  font-size:14px;
+  line-height:1.8;
+}
+
+.steps {
+  counter-reset:item;
+  display:grid;
+  gap:14px;
+}
+
+.step-card {
+  counter-increment:item;
+  position:relative;
+  padding:20px 20px 20px 68px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+.step-card:before {
+  content:counter(item);
+  position:absolute;
+  left:19px;
+  top:19px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#294b86;
+  color:white;
+  font-weight:800;
+}
+
+.step-card h3 {
+  font-size:18px;
+  color:#b4ccff;
+  margin-bottom:5px;
+}
+
+.step-card p {
+  color:#c3cee0;
+}
+
+.checklist {
+  display:grid;
+  gap:10px;
+}
+
+.checklist label {
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  background:#0c1728;
+  padding:12px;
+  border-radius:9px;
+  color:#d1dced;
+}
+
+.checklist input {
+  margin-top:6px;
+  accent-color:#6f9cff;
+}
+
+footer {
+  text-align:center;
+  border-top:1px solid var(--line);
+  padding:30px 15px;
+  color:var(--muted);
+}
+
+@media(max-width:760px) {
+  nav {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .navlinks {
+    gap:12px;
+  }
+
+  .grid,.compare,.command-list {
+    grid-template-columns:1fr;
+  }
+
+  .flow {
+    grid-template-columns:1fr;
+  }
+
+  .flow .step {
+    padding:13px;
+  }
+
+  .hero {
+    padding:62px 18px;
+  }
+
+  .wrap {
+    padding:44px 17px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Navigation -->
-
-    <nav>
-        <div class="logo">⚡ Git & GitHub</div>
-
-        <div>
-            <a href="#about">About</a>
-            <a href="#comparison">Comparison</a>
-            <a href="#commands">Commands</a>
-        </div>
-    </nav>
-
-
-    <!-- Hero Section -->
-
-    <section class="hero">
-
-        <div class="tag">DEVELOPER LEARNING GUIDE</div>
-
-        <h1>
-            Master <span>Git & GitHub</span>
-        </h1>
-
-        <p>
-            Learn how developers track code changes,
-            manage project versions and collaborate
-            with teams using Git and GitHub.
-        </p>
-
-        <a href="#about" class="hero-button">
-            Start Learning →
-        </a>
-
-    </section>
-
-
-    <!-- About Section -->
-
-    <section class="section" id="about">
-
-        <h2 class="section-title">Understand the Basics</h2>
-
-        <p class="section-subtitle">
-            Two essential tools every developer should know.
-        </p>
-
-        <div class="cards">
-
-            <div class="card">
-
-                <div class="card-icon">🛠️</div>
-
-                <h3>What is Git?</h3>
-
-                <p>
-                    Git is a Distributed Version Control System.
-                    It tracks changes in source code and helps
-                    developers manage different versions
-                    of their projects.
-                </p>
-
-                <ul>
-                    <li>Tracks code changes</li>
-                    <li>Saves project versions</li>
-                    <li>Restores previous versions</li>
-                    <li>Supports branching and merging</li>
-                    <li>Works on your local computer</li>
-                </ul>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">🐙</div>
-
-                <h3>What is GitHub?</h3>
-
-                <p>
-                    GitHub is an online platform that hosts
-                    Git repositories. It helps developers
-                    store, share and collaborate on projects.
-                </p>
-
-                <ul>
-                    <li>Stores code online</li>
-                    <li>Shares projects with developers</li>
-                    <li>Supports team collaboration</li>
-                    <li>Provides pull requests</li>
-                    <li>Manages project repositories</li>
-                </ul>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Comparison Section -->
-
-    <section class="section" id="comparison">
-
-        <h2 class="section-title">Git vs GitHub</h2>
-
-        <p class="section-subtitle">
-            Understand the difference clearly.
-        </p>
-
-        <div class="comparison">
-
-            <div class="compare-box">
-
-                <h3>🛠️ Git</h3>
-
-                <p>Version Control System</p>
-
-                <p>Works locally on your computer.</p>
-
-                <p>Tracks changes in source code.</p>
-
-                <p>Manages commits and branches.</p>
-
-            </div>
-
-
-            <div class="compare-box">
-
-                <h3>🐙 GitHub</h3>
-
-                <p>Cloud-based Git hosting platform</p>
-
-                <p>Stores repositories online.</p>
-
-                <p>Helps developers share code.</p>
-
-                <p>Supports collaboration.</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Workflow Section -->
-
-    <section class="section">
-
-        <h2 class="section-title">How Git Works</h2>
-
-        <p class="section-subtitle">
-            Understand the basic Git workflow.
-        </p>
-
-        <div class="workflow">
-
-            <div class="step">
-                <strong>1. Working Directory</strong>
-                <small>Modify your files</small>
-            </div>
-
-            <div class="arrow">→</div>
-
-            <div class="step">
-                <strong>2. Staging Area</strong>
-                <small>git add</small>
-            </div>
-
-            <div class="arrow">→</div>
-
-            <div class="step">
-                <strong>3. Local Repository</strong>
-                <small>git commit</small>
-            </div>
-
-            <div class="arrow">→</div>
-
-            <div class="step">
-                <strong>4. GitHub</strong>
-                <small>git push</small>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Commands Section -->
-
-    <section class="section" id="commands">
-
-        <h2 class="section-title">Important Git Commands</h2>
-
-        <p class="section-subtitle">
-            Learn the commands used in daily development.
-            Click Copy to copy a command.
-        </p>
-
-        <div class="commands">
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git init</code>
-                    <p>Initialize a Git repository</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git status</code>
-                    <p>Check file status</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git add .</code>
-                    <p>Stage all changes</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git commit -m "message"</code>
-                    <p>Save a commit</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git push</code>
-                    <p>Upload commits to GitHub</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git pull</code>
-                    <p>Fetch and integrate remote changes</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git clone URL</code>
-                    <p>Copy a remote repository locally</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git log --oneline</code>
-                    <p>View commit history</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git branch</code>
-                    <p>List branches</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git fetch</code>
-                    <p>Download remote updates</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git merge branch-name</code>
-                    <p>Merge another branch</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-            <div class="command">
-                <div class="command-info">
-                    <code>git revert COMMIT_ID</code>
-                    <p>Reverse a previous commit</p>
-                </div>
-                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Final Highlight -->
-
-    <section class="section">
-
-        <div class="highlight">
-
-            <h3>💡 Remember This!</h3>
-
-            <p>
-                Git = Version Control System
-            </p>
-
-            <p>
-                GitHub = Online Git Repository Hosting Platform
-            </p>
-
-            <p style="margin-top: 15px;">
-                Learn • Practice • Build • Grow 🚀
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <p>
-            Built with ❤️ by <strong>Git & GitHub Learner</strong>
-        </p>
-
-        <p>Keep Learning. Keep Building. 🚀</p>
-
-    </footer>
-
-
-    <!-- Copy Command Function -->
-
-    <script>
-
-        async function copyCommand(button) {
-
-            const command = button.parentElement
-                .querySelector("code").innerText;
-
-            try {
-
-                await navigator.clipboard.writeText(command);
-
-                button.innerText = "Copied!";
-
-                setTimeout(() => {
-                    button.innerText = "Copy";
-                }, 1500);
-
-            } catch (error) {
-
-                button.innerText = "Failed";
-
-                setTimeout(() => {
-                    button.innerText = "Copy";
-                }, 1500);
-
-            }
-        }
-
-    </script>
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">⚡ <span>Git</span> + GitHub + Vercel</div>
+
+  <div class="navlinks">
+    <a href="#basics">Basics</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#commands">Commands</a>
+    <a href="#vercel">Vercel Setup</a>
+    <a href="#updates">Future Updates</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="eyebrow">BEGINNER-FRIENDLY DEVELOPER GUIDE</div>
+
+  <h1>
+    From your code to a
+    <span>live website</span>
+  </h1>
+
+  <p>
+    Understand Git and GitHub, push your project,
+    connect the repository to Vercel, and publish
+    updates automatically — step by step.
+  </p>
+
+  <a class="btn" href="#basics">Start Learning ↓</a>
+</header>
+
+<!-- BASICS -->
+<section class="wrap" id="basics">
+
+  <div class="section-head">
+    <h2>1. Understand the Three Tools</h2>
+    <p>Each tool has a different job. They work together.</p>
+  </div>
+
+  <div class="compare">
+
+    <article class="card">
+      <div class="kicker">On your computer</div>
+      <h3>🛠️ Git</h3>
+
+      <p>
+        Git is a version control system. It records
+        changes to your project so you can track work
+        and return to earlier versions.
+      </p>
+
+      <ul>
+        <li>Tracks file changes</li>
+        <li>Creates commits (saved checkpoints)</li>
+        <li>Supports branches and merging</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="kicker">Online code storage</div>
+      <h3>🐙 GitHub</h3>
+
+      <p>
+        GitHub hosts Git repositories online.
+        It lets you store code remotely and
+        collaborate with other developers.
+      </p>
+
+      <ul>
+        <li>Stores your repository online</li>
+        <li>Provides backup and sharing</li>
+        <li>Supports pull requests and teamwork</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="kicker">Website hosting</div>
+      <h3>▲ Vercel</h3>
+
+      <p>
+        Vercel builds and hosts supported web projects.
+        It can watch your GitHub repository and
+        deploy new commits.
+      </p>
+
+      <ul>
+        <li>Builds your website</li>
+        <li>Publishes a live URL</li>
+        <li>Can deploy pushes automatically</li>
+      </ul>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <b>Easy memory trick:</b>
+    Git = track changes ·
+    GitHub = keep/share code online ·
+    Vercel = publish the website.
+  </div>
+
+</section>
+
+<!-- WORKFLOW -->
+<section class="wrap" id="workflow">
+
+  <div class="section-head">
+    <h2>2. The Complete Workflow</h2>
+    <p>This is what happens when you make a website change.</p>
+  </div>
+
+  <div class="flow">
+
+    <div class="step">
+      <b>1. Edit Code</b>
+      <small>VS Code / Computer</small>
+    </div>
+
+    <div class="step">
+      <b>2. Commit</b>
+      <small>Save a Git checkpoint</small>
+    </div>
+
+    <div class="step">
+      <b>3. Push</b>
+      <small>Send commit to GitHub</small>
+    </div>
+
+    <div class="step">
+      <b>4. Build</b>
+      <small>Vercel builds the project</small>
+    </div>
+
+    <div class="step">
+      <b>5. Live</b>
+      <small>Updated website URL</small>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- COMMANDS -->
+<section class="wrap" id="commands">
+
+  <div class="section-head">
+    <h2>3. Essential Git Commands</h2>
+    <p>
+      Run these in the terminal opened inside your
+      project folder. Use Copy to copy each command.
+    </p>
+  </div>
+
+  <div class="command-list">
+
+    <div class="command">
+      <div>
+        <code>git --version</code>
+        <small>Check whether Git is installed</small>
+      </div>
+      <button class="copy" onclick="copyText('git --version',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git init</code>
+        <small>Start tracking a folder with Git</small>
+      </div>
+      <button class="copy" onclick="copyText('git init',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git status</code>
+        <small>See changed and staged files</small>
+      </div>
+      <button class="copy" onclick="copyText('git status',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git add .</code>
+        <small>Stage all current changes</small>
+      </div>
+      <button class="copy" onclick="copyText('git add .',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git commit -m "message"</code>
+        <small>Save staged changes as a commit</small>
+      </div>
+      <button class="copy" onclick="copyText('git commit -m &quot;message&quot;',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git push</code>
+        <small>Upload commits to the remote branch</small>
+      </div>
+      <button class="copy" onclick="copyText('git push',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git pull</code>
+        <small>Get and integrate remote changes</small>
+      </div>
+      <button class="copy" onclick="copyText('git pull',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git clone REPOSITORY_URL</code>
+        <small>Download a remote repository</small>
+      </div>
+      <button class="copy" onclick="copyText('git clone REPOSITORY_URL',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git log --oneline</code>
+        <small>View compact commit history</small>
+      </div>
+      <button class="copy" onclick="copyText('git log --oneline',this)">Copy</button>
+    </div>
+
+    <div class="command">
+      <div>
+        <code>git branch</code>
+        <small>List local branches</small>
+      </div>
+      <button class="copy" onclick="copyText('git branch',this)">Copy</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FIRST PUSH TO GITHUB -->
+<section class="wrap">
+
+  <div class="section-head">
+    <h2>4. First Time: Push Your Project to GitHub</h2>
+    <p>
+      Do this when your project is on your computer
+      but not yet on GitHub.
+    </p>
+  </div>
+
+  <div class="steps">
+
+    <article class="step-card">
+      <h3>Create a Repository on GitHub</h3>
+
+      <p>
+        Sign in to
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        → Click <b>New repository</b>
+        → Enter a repository name
+        → Choose Public or Private
+        → Click <b>Create repository</b>.
+
+        For an existing local project, avoid adding a
+        README or .gitignore on GitHub at this stage
+        if you want the simplest first push.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Open Your Project in VS Code</h3>
+
+      <p>
+        Open the project folder, then choose
+        <b>Terminal → New Terminal</b>.
+        Make sure the terminal is inside the
+        correct project directory.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Initialize Git and Commit Files</h3>
+
+      <pre><code>git init
+git add .
+git commit -m "Initial commit"
+git branch -M main</code></pre>
+    </article>
+
+    <article class="step-card">
+      <h3>Connect Your Local Project to GitHub</h3>
+
+      <p>
+        Copy the HTTPS repository URL from the
+        GitHub repository page. Replace the example
+        URL below with your own URL.
+      </p>
+
+      <pre><code>git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+git push -u origin main</code></pre>
+
+      <p>
+        Sign in or authorize GitHub if Git asks.
+        Refresh the GitHub repository page;
+        your project files should appear.
+      </p>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <b>If you already pushed your project to GitHub:</b>
+    Skip this section. You do not need to push it again
+    just to connect Vercel.
+  </div>
+
+</section>
+
+<!-- VERCEL CONNECTION -->
+<section class="wrap" id="vercel">
+
+  <div class="section-head">
+    <h2>5. Connect GitHub to Vercel</h2>
+    <p>
+      One-time setup: link your GitHub repository
+      to a Vercel project.
+    </p>
+  </div>
+
+  <div class="steps">
+
+    <article class="step-card">
+      <h3>Open Vercel and Sign In</h3>
+
+      <p>
+        Go to
+        <a href="https://vercel.com/" target="_blank" rel="noopener">vercel.com</a>.
+
+        Sign in using GitHub if possible.
+        If asked, authorize Vercel to access the
+        GitHub account or repositories you want to deploy.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Import Your GitHub Repository</h3>
+
+      <p>
+        From the Vercel dashboard, click
+        <b>Add New → Project</b>
+        (or <b>Import Project</b>).
+
+        Under Import Git Repository, find the repository
+        you pushed to GitHub and click <b>Import</b>.
+
+        If it is missing, check the GitHub permissions
+        / repository access in Vercel.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Check Project Settings</h3>
+
+      <p>
+        Vercel usually detects popular frameworks automatically.
+        Confirm the <b>Framework Preset</b>,
+        <b>Root Directory</b>, <b>Build Command</b>,
+        and <b>Output Directory</b> for your project.
+
+        For a simple static HTML/CSS/JS website, select
+        the appropriate Other/static configuration and
+        make sure the HTML entry file (commonly
+        <code>index.html</code>) is in the deployed
+        root directory.
+
+        Do not copy settings blindly from another framework.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Deploy</h3>
+
+      <p>
+        Click <b>Deploy</b>.
+
+        Vercel installs dependencies if needed,
+        runs the build (if configured), and publishes
+        the result.
+
+        When deployment succeeds, open the generated
+        <code>.vercel.app</code> URL.
+      </p>
+    </article>
+
+    <article class="step-card">
+      <h3>Confirm the Git Connection</h3>
+
+      <p>
+        Open the Vercel project
+        → <b>Settings → Git</b>.
+
+        Confirm the correct GitHub repository is connected
+        and note the Production Branch (commonly
+        <code>main</code>).
+      </p>
+    </article>
+
+  </div>
+
+  <div class="note success">
+    <b>Important:</b>
+    You connect the repository to Vercel only once.
+    After that, pushes to the connected production
+    branch can trigger production deployments automatically.
+  </div>
+
+</section>
+
+<!-- FUTURE UPDATES -->
+<section class="wrap" id="updates">
+
+  <div class="section-head">
+    <h2>6. Every Future Update: Edit → Push → Live</h2>
+    <p>
+      Once GitHub is connected to Vercel,
+      this is your normal routine.
+    </p>
+  </div>
+
+  <div class="panel">
+
+    <div class="kicker">
+      Example: You changed your website heading in VS Code
+    </div>
+
+    <h3>Run These Three Commands</h3>
+
+    <pre><code>git add .
+git commit -m "Updated website design"
+git push origin main</code></pre>
+
+    <p>What happens next?</p>
+
+    <ol style="padding-left:22px;color:#d2deef;margin-top:10px">
+      <li>
+        Git sends your new commit to the GitHub
+        <code>main</code> branch.
+      </li>
+
+      <li>
+        Vercel detects the new commit in the
+        connected repository.
+      </li>
+
+      <li>
+        Vercel starts a deployment and shows its
+        status in the Deployments tab.
+      </li>
+
+      <li>
+        If the deployment succeeds, the Production URL
+        serves the new version.
+      </li>
+    </ol>
+
+  </div>
+
+  <div class="note">
+    <b>Branch rule:</b>
+    A push to the configured Production Branch
+    (often <code>main</code>) normally creates a
+    Production Deployment.
+
+    A push to another branch usually creates a
+    Preview Deployment. Your Vercel project settings
+    determine the exact behavior.
+  </div>
+
+  <!-- TROUBLESHOOTING -->
+  <div class="section-head" style="margin-top:42px">
+    <h2>7. If the Website Does Not Update</h2>
+    <p>Check these points before changing settings.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <h3>Deployment Failed</h3>
+      <p>
+        Vercel → Project → Deployments
+        → Open the latest deployment
+        → Inspect Build Logs.
+
+        Fix the reported error, then commit and push again.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Wrong Branch</h3>
+      <p>
+        Check Vercel → Settings → Git
+        → Production Branch.
+
+        Make sure you pushed to that branch if you
+        expect a production update.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Wrong Repository or Folder</h3>
+      <p>
+        Confirm the connected GitHub repository
+        and Vercel Root Directory.
+
+        Your website files must be inside the
+        configured project root.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Old Version Still Visible</h3>
+      <p>
+        Open the latest successful deployment URL,
+        refresh the browser, and check whether
+        the Production domain points to that deployment.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- CHECKLIST -->
+<section class="wrap">
+
+  <div class="section-head">
+    <h2>8. Quick Checklist</h2>
+    <p>Tick each item as you complete your deployment setup.</p>
+  </div>
+
+  <div class="panel checklist">
+
+    <label>
+      <input type="checkbox">
+      My project is saved in a local folder.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      Git is installed and the project is committed.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      My code is visible in a GitHub repository.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      I signed in to Vercel with GitHub and authorized repository access.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      I imported the correct repository and checked its settings.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      The first Vercel deployment succeeded and the live URL opens.
+    </label>
+
+    <label>
+      <input type="checkbox">
+      I tested a new commit and confirmed Vercel deployed it.
+    </label>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built for beginners learning the developer workflow.</p>
+  <p>Learn • Commit • Push • Deploy • Repeat 🚀</p>
+</footer>
+
+<script>
+async function copyText(text,button) {
+
+  const original = button.textContent;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    button.textContent = 'Copied!';
+  }
+  catch(e) {
+    button.textContent = 'Select & copy';
+  }
+
+  setTimeout(() => {
+    button.textContent = original;
+  },1400);
+}
+</script>
 
 </body>
 </html>
