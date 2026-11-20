@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Git & GitHub | Developer Guide</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0b1120;
+            color: #f1f5f9;
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: #111b2e;
+            border-bottom: 1px solid #26364f;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #8bb4ff;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #82aaff;
+        }
+
+        /* Hero Section */
+
+        .hero {
+            text-align: center;
+            padding: 90px 20px 65px;
+            background:
+                radial-gradient(circle at top, #263d70, #0b1120 65%);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 18px;
+            border: 1px solid #526fae;
+            border-radius: 30px;
+            color: #a9c6ff;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 65px);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #82aaff;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #b7c5d9;
+            font-size: 17px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 13px 28px;
+            background: #527ef0;
+            color: white;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #759aff;
+            transform: translateY(-3px);
+        }
+
+        /* Common Sections */
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 65px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 38px;
+        }
+
+        /* Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #152239;
+            border: 1px solid #293c5c;
+            border-radius: 18px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #7098f5;
+            box-shadow: 0 12px 35px #0005;
+        }
+
+        .card-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #8bb4ff;
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #bdcadd;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            color: #d5dfed;
+        }
+
+        .card li {
+            margin: 8px 0;
+        }
+
+        /* Comparison */
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .compare-box {
+            background: #152239;
+            border: 1px solid #293c5c;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .compare-box h3 {
+            color: #8bb4ff;
+            margin-bottom: 12px;
+        }
+
+        /* Workflow */
+
+        .workflow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .step {
+            background: #1b2d49;
+            border: 1px solid #527ef0;
+            border-radius: 12px;
+            padding: 17px 22px;
+            text-align: center;
+            min-width: 145px;
+        }
+
+        .step strong {
+            display: block;
+            color: #9bbcff;
+        }
+
+        .step small {
+            color: #b5c3d8;
+        }
+
+        .arrow {
+            color: #82aaff;
+            font-size: 25px;
+        }
+
+        /* Commands */
+
+        .commands {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .command {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: #152239;
+            padding: 17px;
+            border: 1px solid #293c5c;
+            border-radius: 12px;
+        }
+
+        .command-info {
+            min-width: 0;
+        }
+
+        .command code {
+            color: #9bbcff;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .command p {
+            color: #9baec7;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .copy-btn {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 7px;
+            background: #355baf;
+            color: white;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: #527ef0;
+        }
+
+        /* Highlight */
+
+        .highlight {
+            background: linear-gradient(120deg, #1c3767, #372b68);
+            border: 1px solid #536db2;
+            padding: 30px;
+            border-radius: 17px;
+            text-align: center;
+        }
+
+        .highlight h3 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .highlight p {
+            color: #d5e0ff;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 28px 15px;
+            background: #111b2e;
+            color: #94a3b8;
+            border-top: 1px solid #26364f;
+        }
+
+        footer strong {
+            color: #8bb4ff;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .cards,
+            .comparison,
+            .commands {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .hero {
+                padding: 65px 18px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+        <div class="logo">⚡ Git & GitHub</div>
+
+        <div>
+            <a href="#about">About</a>
+            <a href="#comparison">Comparison</a>
+            <a href="#commands">Commands</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="tag">DEVELOPER LEARNING GUIDE</div>
+
+        <h1>
+            Master <span>Git & GitHub</span>
+        </h1>
+
+        <p>
+            Learn how developers track code changes,
+            manage project versions and collaborate
+            with teams using Git and GitHub.
+        </p>
+
+        <a href="#about" class="hero-button">
+            Start Learning →
+        </a>
+
+    </section>
+
+
+    <!-- About Section -->
+
+    <section class="section" id="about">
+
+        <h2 class="section-title">Understand the Basics</h2>
+
+        <p class="section-subtitle">
+            Two essential tools every developer should know.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">🛠️</div>
+
+                <h3>What is Git?</h3>
+
+                <p>
+                    Git is a Distributed Version Control System.
+                    It tracks changes in source code and helps
+                    developers manage different versions
+                    of their projects.
+                </p>
+
+                <ul>
+                    <li>Tracks code changes</li>
+                    <li>Saves project versions</li>
+                    <li>Restores previous versions</li>
+                    <li>Supports branching and merging</li>
+                    <li>Works on your local computer</li>
+                </ul>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🐙</div>
+
+                <h3>What is GitHub?</h3>
+
+                <p>
+                    GitHub is an online platform that hosts
+                    Git repositories. It helps developers
+                    store, share and collaborate on projects.
+                </p>
+
+                <ul>
+                    <li>Stores code online</li>
+                    <li>Shares projects with developers</li>
+                    <li>Supports team collaboration</li>
+                    <li>Provides pull requests</li>
+                    <li>Manages project repositories</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Comparison Section -->
+
+    <section class="section" id="comparison">
+
+        <h2 class="section-title">Git vs GitHub</h2>
+
+        <p class="section-subtitle">
+            Understand the difference clearly.
+        </p>
+
+        <div class="comparison">
+
+            <div class="compare-box">
+
+                <h3>🛠️ Git</h3>
+
+                <p>Version Control System</p>
+
+                <p>Works locally on your computer.</p>
+
+                <p>Tracks changes in source code.</p>
+
+                <p>Manages commits and branches.</p>
+
+            </div>
+
+
+            <div class="compare-box">
+
+                <h3>🐙 GitHub</h3>
+
+                <p>Cloud-based Git hosting platform</p>
+
+                <p>Stores repositories online.</p>
+
+                <p>Helps developers share code.</p>
+
+                <p>Supports collaboration.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Workflow Section -->
+
+    <section class="section">
+
+        <h2 class="section-title">How Git Works</h2>
+
+        <p class="section-subtitle">
+            Understand the basic Git workflow.
+        </p>
+
+        <div class="workflow">
+
+            <div class="step">
+                <strong>1. Working Directory</strong>
+                <small>Modify your files</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <strong>2. Staging Area</strong>
+                <small>git add</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <strong>3. Local Repository</strong>
+                <small>git commit</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <strong>4. GitHub</strong>
+                <small>git push</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Commands Section -->
+
+    <section class="section" id="commands">
+
+        <h2 class="section-title">Important Git Commands</h2>
+
+        <p class="section-subtitle">
+            Learn the commands used in daily development.
+            Click Copy to copy a command.
+        </p>
+
+        <div class="commands">
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git init</code>
+                    <p>Initialize a Git repository</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git status</code>
+                    <p>Check file status</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git add .</code>
+                    <p>Stage all changes</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git commit -m "message"</code>
+                    <p>Save a commit</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git push</code>
+                    <p>Upload commits to GitHub</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git pull</code>
+                    <p>Fetch and integrate remote changes</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git clone URL</code>
+                    <p>Copy a remote repository locally</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git log --oneline</code>
+                    <p>View commit history</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git branch</code>
+                    <p>List branches</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git fetch</code>
+                    <p>Download remote updates</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git merge branch-name</code>
+                    <p>Merge another branch</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+            <div class="command">
+                <div class="command-info">
+                    <code>git revert COMMIT_ID</code>
+                    <p>Reverse a previous commit</p>
+                </div>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Final Highlight -->
+
+    <section class="section">
+
+        <div class="highlight">
+
+            <h3>💡 Remember This!</h3>
+
+            <p>
+                Git = Version Control System
+            </p>
+
+            <p>
+                GitHub = Online Git Repository Hosting Platform
+            </p>
+
+            <p style="margin-top: 15px;">
+                Learn • Practice • Build • Grow 🚀
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            Built with ❤️ by <strong>Git & GitHub Learner</strong>
+        </p>
+
+        <p>Keep Learning. Keep Building. 🚀</p>
+
+    </footer>
+
+
+    <!-- Copy Command Function -->
+
+    <script>
+
+        async function copyCommand(button) {
+
+            const command = button.parentElement
+                .querySelector("code").innerText;
+
+            try {
+
+                await navigator.clipboard.writeText(command);
+
+                button.innerText = "Copied!";
+
+                setTimeout(() => {
+                    button.innerText = "Copy";
+                }, 1500);
+
+            } catch (error) {
+
+                button.innerText = "Failed";
+
+                setTimeout(() => {
+                    button.innerText = "Copy";
+                }, 1500);
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
